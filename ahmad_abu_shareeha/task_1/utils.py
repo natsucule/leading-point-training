@@ -1,5 +1,5 @@
 import json
-from mimetypes import read_mime_types
+
 
 todo_file = "todo.json"
 
@@ -9,7 +9,7 @@ try:
     with open(todo_file, "r") as file:
         notes = json.load(file)
 except (FileNotFoundError, json.JSONDecodeError):
-    notes = default_notes.copy()
+    pass
 
 # Save updated notes back to file
 def save_notes():
