@@ -3,18 +3,14 @@ from operator import index
 
 details=[]
 contact={}
-
-hm=""
-con="Contacts.json"
-
 try:
-    with open(con, "r") as file:
-        contact = json.load(file)
+    with open("Contacts.json", "r") as file:
+         contact_json = json.load(file)
+
 except (FileNotFoundError, json.JSONDecodeError):
-    contact = {}
-
-
-
+    contact_json = {}
+    print("json.JSONDecodeError")
+#print(contact_json)
 
 class contacts:
     def __init__(self):
@@ -24,21 +20,42 @@ class contacts:
         self.email = None
         self.c_name = None
         self.find=None
+        self.contact_json=None
+        self.up=None
 
-    def save_notes(self):
-        with open("Contacts.json", "a") as file:
+
+
+
+    def save_contacts(self):
+        with open("Contacts.json", "w") as file:
             json.dump(contact, file, indent=4)
+
+    def load_contact(self):
+        with open("Contacts.json", "r") as file:
+            try:
+                with open("Contacts.json", "r") as file:
+                    self.contact_json = json.load(file)
+                    contact.update(self.contact_json)
+
+            except (FileNotFoundError, json.JSONDecodeError):
+                self.contact_json = {}
+                print("json.JSONDecodeError")
+
 
 
     def add_contact(self,check="",reverse=""):
+        res = self.load_contact()
         self.list_all()
+
 
         while True:
 
 
-            print("contact name")
+            print(
+                "contact name")
 
-            self.c_name = input("Enter contact name : ")
+            self.c_name = input("Enter contact name : ").lower()
+
             if self.c_name in contact.keys():
                 print("this contact already exists")
                 continue
@@ -49,7 +66,7 @@ class contacts:
 
 
             print("enter the name")
-            self.name = input()
+            self.name = input().lower()
 
             if  self.name=="":
                 print("Not a valid name please only enter letters")
@@ -81,7 +98,12 @@ class contacts:
 
                 continue
 
+
+
             details.clear()
+
+
+            self.load_contact()
 
 
             details.append(f"Name: {self.name}")
@@ -89,13 +111,17 @@ class contacts:
             details.append(f"Email: {self.email}")
 
             contact.update({self.c_name:details})
-            self.save_notes()
+            self.save_contacts()
+
 
 
             break
 
 
     def list_all(self):
+        self.load_contact()
+
+        print("all contacts")
         if not contact:
             print("The list is empty.")
             return
@@ -103,13 +129,16 @@ class contacts:
             print(f"{i}. {con}")
 
         print("Contacts:")
+
+
         print(contact)
+
 
 
 
     def search(self):
         self.list_all()#search
-        self.find=input("what u looking for?")
+        self.find=input("what u looking for?").lower()
         for i in contact:
             if self.find in contact.keys():
                 print("*******************************************")
@@ -120,39 +149,61 @@ class contacts:
 
     def delete_contact(self,confirmation=""):
         self.list_all()
-        self.find = input("which contact you want to delete?")
-        for i in contact:
-            if self.find in contact.keys():
-                print(f"are you sure you want to delete {self.find} from your contacts? [Y/N]")
-                confirmation = input().lower().strip()
-                if confirmation == "y":
-                    del (contact[self.find])
-                    self.save_notes()
-                elif confirmation == "n":
-                    pass
-                else:
-                    print("invalid input")
-                    continue
+        self.up = contact
+        self.find = input("which contact you want to delete?").lower()
+        if self.find in contact.keys():
+            print(f"are you sure you want to delete {self.find} from your contacts? [Y/N]")
+            confirmation = input().lower().strip()
+            if confirmation == "y":
+                del (self.up[self.find])
+                contact.update(self.up)
+                self.save_contacts()
+                self.up.clear()
+            elif confirmation == "n":
+                pass
+            else:
+                print("invalid input")
+
+
+
 
 
     def modify_contact(self):
         self.list_all()
-        self.find = input("which contact you want to modify?")
+        self.up=contact
+        self.find = input("which contact you want to modify?").lower()
         if self.find in contact.keys():
-             del (contact[self.find])
-             self.add_contact()
-             self.save_notes()
-             print(self.find)
-
-
-
-
-
-
+            del (self.up[self.find])
+            contact.update(self.up)
+            self.save_contacts()
+            self.up.clear()
+            self.add_contact()
+            #contact.update(self.up)
+            print(contact)
+            self.save_contacts()
 
 
 c=contacts()
-c.list_all()
+
+'''
+    def modify_contact(self):
+        self.list_all()
+        self.find = input("which contact you want to modify?").lower()
+        if self.find in contact.keys():
+            del (contact[self.find])
+            self.add_contact()
+            self.save_contacts()
+            print(self.find)
+
+
+
+c.load_contact()
+
+#c.list_all()
 #c.add_contact()
 c.modify_contact()
+#c.delete_contact()
 #print(contact)
+c.list_all()
+
+'''
