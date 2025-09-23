@@ -44,6 +44,7 @@ class contacts:
             if self.name in contact.keys():
                 print("This contact already exists")
                 continue
+            
             break
 
         while True:
