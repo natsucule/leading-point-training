@@ -1,33 +1,26 @@
 import unittest
-from contacts import contacts, contact
+from cli_utils import *
 
-class testcontacts(unittest.TestCase):
+class TestContacts(unittest.TestCase):
     def setUp(self):
         contact.clear()
-        self.c = contacts()
 
     def test_add_contact(self):
-        c = self.c
-        c.name = "a"
-        c.phone = "1111111"
-        c.email = "a@gmail.com"
-        c.add_contact = lambda: contact.update({c.name: [f"Phone Number: {c.phone}", f"Email: {c.email}"]})
-        c.add_contact()
+        contact["a"] = {"phone": "111", "email": "a@gmail.com"}
         self.assertIn("a", contact)
+        self.assertEqual(contact["a"]["phone"], "111")
+        self.assertEqual(contact["a"]["email"], "a@gmail.com")
 
     def test_search_contact(self):
-        contact["b"] = ["Phone Number: 2222222", "Email: b@gmail.com"]
-        c = self.c
-        c.find = "b"
-        found = [n for n in contact if c.find in n]
-        self.assertIn("b", found)
+        contact["b"] = {"phone": "22222", "email": "b@gmail.com"}
+        found = "b" in contact
+        self.assertTrue(found)
+        self.assertEqual(contact["b"]["phone"], "22222")
 
     def test_delete_contact(self):
-        contact["c"] = ["Phone Number: 3333333", "Email: c@gmail.com"]
-        c = self.c
-        c.find = "c"
-        c.delete_contact = lambda: contact.pop(c.find, None)
-        c.delete_contact()
+        contact["c"] = {"phone": "3333", "email": "c@gmail.com"}
+        self.assertIn("c", contact)
+        del contact["c"]
         self.assertNotIn("c", contact)
 
 if __name__ == "__main__":
