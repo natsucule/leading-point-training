@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 from cli_utils import *
 
+=======
+from Cli_utils import *
+import argparse
+>>>>>>> d36b3dfb009516a2d0ae1aab0fe127f5ca29290b
 if __name__ == '__main__':
     help_text = """
 Available commands:
@@ -32,8 +37,23 @@ Available commands:
             print("Invalid choice. Type 'help' or 'h' to see available commands.")
         return True
 
+<<<<<<< HEAD
     print("Type 'quit' or 'q' to exit. Type 'help' or 'h' for help.")
     running = True
     while running:
         user_choice = input("Choose (add, delete, list, modify, search, quit): ").strip().lower()
         running = process_choice(user_choice)
+=======
+
+    print("Type 'quit' or 'q' to exit. Type 'help' or 'h' for help.")  # a note for the user
+
+    if args.choose:
+        # If argument given process it once and exit
+        process_choice(args.choose.lower())
+    else:
+        # No argument
+        running = True
+        while running:
+            user_choice = input("Choose (add, delete, list, modify, quit): ").strip().lower()
+            running = process_choice(user_choice)
+>>>>>>> d36b3dfb009516a2d0ae1aab0fe127f5ca29290b

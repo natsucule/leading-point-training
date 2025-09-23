@@ -80,6 +80,7 @@ def modify_contact():
             if new_name and not new_name.replace(" ", "").isalpha():
                 print("Not a valid name, only letters and spaces are allowed")
                 continue
+            
             break
         while True:
             phone = input("Enter new phone number: ").strip()
@@ -110,9 +111,19 @@ def name_search():
         print("The list is empty.")
         return
 
+<<<<<<< HEAD
     name = input("Enter name to search: ").strip()
     if name in contact:
         con = contact[name]
         print(f"Name: {name} , Phone: {con['phone']} , Email: {con['email']}")
     else:
         print(f"No contact found matching '{name}'")
+=======
+c = contacts()
+# Example usage:
+# c.add_contact()
+# c.list_all()
+# c.search()
+# c.modify_contact()
+# c.delete_contact()
+>>>>>>> d36b3dfb009516a2d0ae1aab0fe127f5ca29290b
