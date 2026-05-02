@@ -1,0 +1,26 @@
+2026-05-01 08:12:01,123 INFO Starting application
+2026-05-01 08:12:02,456 INFO Connecting to database
+2026-05-01 08:12:03,789 ERROR Database connection failed
+2026-05-01 08:12:04,001 INFO Retrying connection
+2026-05-01 08:12:05,222 ERROR Database connection failed
+2026-05-01 08:12:06,333 INFO Connected successfully
+
+2026-05-01 09:15:10,100 INFO User login attempt user_id=42
+2026-05-01 09:15:11,200 ERROR Invalid password user_id=42
+2026-05-01 09:15:12,300 INFO User login attempt user_id=43
+2026-05-01 09:15:13,400 INFO User logged in user_id=43
+
+2026-05-01 10:20:20,555 INFO Fetching orders
+2026-05-01 10:20:21,666 ERROR Timeout while fetching orders
+2026-05-01 10:20:22,777 INFO Retrying fetch
+2026-05-01 10:20:23,888 INFO Orders fetched successfully
+
+2026-05-01 11:30:30,999 INFO Payment processing started order_id=1001
+2026-05-01 11:30:31,111 ERROR Payment gateway unreachable
+2026-05-01 11:30:32,222 INFO Retrying payment
+2026-05-01 11:30:33,333 ERROR Payment failed order_id=1001
+
+2026-05-01 12:45:40,444 INFO Scheduled job started
+2026-05-01 12:45:41,555 INFO Cleaning temp files
+2026-05-01 12:45:42,666 ERROR Failed to delete temp file
+2026-05-01 12:45:43,777 INFO Scheduled job finished
